@@ -1,0 +1,26 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  Header append X-FRAME-OPTIONS "DENY"
+  RewriteBase /ACI
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.*)$ index.php?/$1 [L]
+</IfModule>
+<IfModule !mod_rewrite.c>
+  # If we don't have mod_rewrite installed, all 404's
+  # can be sent to index.php, and everything works as normal.
+  # Submitted by: ElliotHaughin
+
+  ErrorDocument 404 /index.php
+</IfModule>
+#RewriteEngine on
+#RewriteCond $1 !^(index\.php|resources|documents|robots\.txt)
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule ^(.*)$ index.php/$1 [L,QSA]
+#<IfModule mod_headers.c>
+    # WEEK
+ #   <FilesMatch "\.(ico|pdf|flv|jpg|JPG|jpeg|png|gif|js|css|swf|html|txt)$">
+  #      Header set Cache-Control "max-age=290304000, public"
+   # </FilesMatch>
+#</IfModule>
